@@ -8,7 +8,7 @@ The example model I chose is an object detect model which uses Joseph Redmon's Y
 # Host Dependencies
 You will need python 3.6, docker, and prefect which are the only dependencies for your host machine.  This workflow can be run on windows, mac or linux; however, setting up docker and python 3.6 will vary depending on your host machine.  I recommend using conda to set up a python environment and to install docker follow the instructions here https://www.docker.com/get-started.
 
-Assuming you have docker and conda already installed here are the step by step instructions and will work for any host os.
+Assuming you have docker and conda already installed here are the step by step instructions.
 
 Clone the directory.
 ```dif
