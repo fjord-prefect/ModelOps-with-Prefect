@@ -1,6 +1,6 @@
 # ModelOps-with-Prefect
 
-This is an poc suggestion of a way to implement the start of a CI/CD/CT process.  I chose Prefect because it's the lowest overhead and easiest to get started of the MLOps tools out there eg Airflow, Kubeflow etc.  I'm not a proponent of prefect despite my github handle.  I'd actually choose Airflow over Prefect due to its larger user base and tutorials for different non-template use cases are more readily available.
+This is a poc suggestion of a way to implement the start of a CI/CD/CT process.  I chose Prefect because it's the lowest overhead and easiest to get started of the MLOps tools out there eg Airflow, Kubeflow etc.  I don't prefer any of these tools over any other despite my github handle.
 
 # The Example
 The example model I chose is an object detect model which uses Joseph Redmon's You Only Look Once model architecture to predict bounding box coordinates of dogs in images.  Basically it predicts where a dog is in an image by drawing a box around it.  I've hard coded scripts.utils to only pull 3 images of dogs from coco so if you'd actually want to train a good model you'll have to alter line 42 in scripts/utils.py.  This will download about 5000 images of dogs if you let it.
