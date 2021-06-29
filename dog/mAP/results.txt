@@ -1,0 +1,8 @@
+# AP and precision/recall per class
+0.000% = dog AP  
+ Precision: ['0.000', '0.000']
+ Recall   :['0.000', '1.000']
+
+
+# mAP of all classes
+mAP = 0.000%, 0.25 FPS

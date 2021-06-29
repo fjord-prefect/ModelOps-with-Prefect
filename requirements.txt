@@ -1,0 +1,11 @@
+scikit-image
+tqdm
+pycocotools
+numpy
+matplotlib
+jupyterlab
+pandas
+prefect
+graphviz
+tensorflow
+opencv-python
