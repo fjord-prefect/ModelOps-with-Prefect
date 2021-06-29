@@ -34,7 +34,8 @@ Woohoo we have our prefect server running but it doesn't know about any of our c
 Okay now before we can run our code in prefect we need to set up an agent to communicate our code to the prefect server.  Open a new terminal window.  You will need admin rights on this one so sudo -i if you're on linux.
 
 **$prefect agent docker start**
-
+**$prefect agent docker start --volume \<insert path on your computer to dir\>/ModelOps-with-Prefect/local_feature_store:/home/local_feature_store --label feature_store**
+  
 Now we need a docker container to run our actual python code so open another terminal.  cd to the ModelOps-with-Prefect directory.  Make sure you're in the right conda environment.
 
 **$conda activate threesix**
@@ -58,15 +59,6 @@ prefecthq/server        core-0.14.22   e9ea2f58c4f6   4 weeks ago     398MB
 prefecthq/apollo        core-0.14.22   eb0ed8596e5e   4 weeks ago     320MB
 
 A container is the running version of an image and is its own little operating system isolated from the host machine but using it memory and cpu etc.  To see what containers are running use the command $docker ps
-
-(threesix) dead4taxreasons@dead4taxreasons:~/Desktop/test/ModelOps-with-Prefect$ sudo docker ps
-CONTAINER ID   IMAGE                           COMMAND                  CREATED          STATUS                    PORTS                                               NAMES
-8ebfb15e111a   prefecthq/ui:core-0.14.22       "/docker-entrypoint.…"   24 minutes ago   Up 24 minutes (healthy)   80/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tmp_ui_1
-4f0f181d9c44   prefecthq/apollo:core-0.14.22   "tini -g -- bash -c …"   24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:4200->4200/tcp, :::4200->4200/tcp           tmp_apollo_1
-b0437fdbc557   prefecthq/server:core-0.14.22   "tini -g -- python s…"   24 minutes ago   Up 24 minutes                                                                 tmp_towel_1
-fa3e7455b4f3   prefecthq/server:core-0.14.22   "tini -g -- bash -c …"   24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:4201->4201/tcp, :::4201->4201/tcp           tmp_graphql_1
-ebfa2cb62152   hasura/graphql-engine:v1.3.3    "graphql-engine serve"   24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp           tmp_hasura_1
-66e6897ab1a6   postgres:11                     "docker-entrypoint.s…"   24 minutes ago   Up 24 minutes (healthy)   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp           tmp(threesix) 
 
 Here you can see all of our prefect server containers running and the images they are using as blueprints.  So we still haven't ran any of our code!  This all been set up to now.  Let recap all of our windows we have open and steps up until now.  We have:
 
