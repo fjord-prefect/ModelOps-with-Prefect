@@ -2,8 +2,10 @@
 
 This is an poc suggestion of a way to implement the start of a CI/CD/CT process.  I chose Prefect because it's the lowest overhead and easiest to get started of the MLOps tools out there eg Airflow, Kubeflow etc.  I'm not a proponent of prefect despite my github handle.  I'd actually choose Airflow over Prefect due to its larger user base and tutorials for different non-template use cases are more readily available.
 
+# The Example
 The example model I chose is an object detect model which uses Joseph Redmon's You Only Look Once model architecture to predict bounding box coordinates of dogs in images.  Basically it predicts where a dog is in an image by drawing a box around it.  I've hard coded scripts.utils to only pull 3 images of dogs from coco so if you'd actually want to train a good model you'll have to alter line 42 in scripts/utils.py.  This will download about 5000 images of dogs if you let it.
 
+# Host Dependencies
 You will need python 3.6, docker, and prefect which are the only dependencies for your host machine.  This workflow can be run on windows, mac or linux; however, setting up docker and python 3.6 will vary depending on your host machine.  I recommend using conda to set up a python environment and to install docker follow the instructions here https://www.docker.com/get-started.
 
 Assuming you have docker and conda already installed here are the step by step instructions and will work for any host os.
@@ -22,6 +24,7 @@ Test it out by running
 python -V
 The output should look like:  Python 3.6.13 :: Anaconda, Inc.
 
+# Set up Prefect Server
 Open a separate terminal window.
 You may need root access for docker commands in linux and I'm still sorting out some path issues.  So if you are on linux make sure your python path is in your /etc/sudoers file.  If you're on Windows it doesn't matter.
 
@@ -42,6 +45,8 @@ Woohoo we have our prefect server running but it doesn't know about any of our c
 Now go to localhost:8080 in your browser and click the project tab and start a new project and name it monster_mash.
 
 Okay now before we can run our code in prefect we need to set up an agent to communicate our code to the prefect server.  Open a new terminal window.
+
+# Set up Prefect Agent
 
 **$prefect agent docker start --volume \<insert path on your computer to dir\>/ModelOps-with-Prefect/local_feature_store:/home/local_feature_store --label feature_store**
   
@@ -75,6 +80,8 @@ Here you can see all of our prefect server containers running and the images the
 (2) a running prefect agent ...in our python3.6 environment that we're calling "threesix"...
 (3) a built docker image that we tagged fjord_prefect:1 ...this has all our code and ML dependencies...
 
+# Register your Flow
+
 Now lets actually train the model and run a prefect flow.  
 
 Open a new terminal window:
@@ -85,4 +92,5 @@ Open a new terminal window:
 
 **$python fjord_flow.py**
 
+# Run your Flow through the UI
 Now the code and image are registered as a flow under the flows tab in the UI.  You can now run this flow through the UI which will spin up the docker container fjord_prefect:1 and run your code and all the dependencies on that docker container.  You can track run metrics etc.  The output from the run will be located in your local_feature_store directory in ModelOps-with-Prefect.  It will also be located in a docker volume that can be accessed and used by other docker containers.
