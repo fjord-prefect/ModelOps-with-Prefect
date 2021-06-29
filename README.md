@@ -12,14 +12,14 @@ Assuming you have docker and conda already installed here are the step by step i
 
 Clone the directory.
 ```dif
-$git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git
-$cd ModelOps-with-Prefect
+git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git
+cd ModelOps-with-Prefect
 ```
 
 Create an environment called threesix which has python 3.6 installed and activate it.
 ```dif
-$conda create -n threesix python=3.6
-$conda activate threesix
+conda create -n threesix python=3.6
+conda activate threesix
 ```
 
 You should now see the text "(threesix)" in your command prompt.  
@@ -33,7 +33,8 @@ You may need root access for docker commands in linux and I'm still sorting out 
 
 Now install prefect
 ```dif
-$pip install prefect
+conda activate threesix
+pip install prefect
 ```
 
 boot up the prefect server
@@ -51,7 +52,8 @@ Now go to localhost:8080 in your browser and click the project tab and start a n
 # Set up Prefect Agent
 Okay now before we can run our code in prefect we need to set up an agent to communicate our code to the prefect server.  Open a new terminal window.
 ```dif
-$prefect agent docker start --volume \<insert path on your computer to dir\>/ModelOps-with-Prefect/local_feature_store:/home/local_feature_store --label feature_store --show-flow-logs
+conda activate threesix
+prefect agent docker start --volume \<insert path on your computer to dir\>/ModelOps-with-Prefect/local_feature_store:/home/local_feature_store --label feature_store --show-flow-logs
 ```
 This step is important. During the flow run a directory local_feature_store and a directory volume will be created.  The --volume tag sets up a bind mount with the local_feature_store on your computer located in the ModelOps-with-Prefect directory and the docker image directory.  During the container run the model will download images and output model metrics and predictions to this directory which because you set up the bind mount will also show up on your local machine.  The second --volume tag creates a named volume that persists within docker.  This persisting directory can be mounted to any container share across registries etc.
   
@@ -60,8 +62,8 @@ Now we need a docker image that has the dependencies to run our actual modoel co
 
 Build the docker image
 ```dif
-$conda activate threesix
-$docker build . -t fjord_prefect:1
+conda activate threesix
+docker build . -t fjord_prefect:1
 ```
 If you have issues with this step.  First make sure you are in the ModelOps-with-Prefect directory.  When you run ls there should be a file called Dockerfile in the directory.  Next make sure you are in the correct conda environment with the command $conda activate threesix.  When you run python -V you should get Python 3.6.  
 
@@ -92,9 +94,9 @@ Now lets actually train the model and run a prefect flow.
 Open a new terminal window:
 
 ```diff
-$conda activate threesix
-$cd <some_path_...>/ModelOps-with-Prefect
-$python fjord_flow.py
+conda activate threesix
+cd <some_path_...>/ModelOps-with-Prefect
+python fjord_flow.py
 ```
 
 # Run your Flow through the UI
