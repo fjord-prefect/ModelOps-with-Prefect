@@ -11,7 +11,9 @@ You will need python 3.6, docker, and prefect which are the only dependencies fo
 Assuming you have docker and conda already installed here are the step by step instructions and will work for any host os.
 
 Clone the directory.
-**$git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git**
+'''dif
+**$!git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git**
+'''dif
 **$cd ModelOps-with-Prefect**
 
 Create an environment called threesix which has python 3.6 installed.
