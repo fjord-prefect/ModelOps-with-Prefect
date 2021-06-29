@@ -1,5 +1,4 @@
 import os,re
-from tqdm import tqdm
 from prefect import task, Flow, Parameter
 from prefect.storage import Docker
 from prefect.triggers import always_run
@@ -50,7 +49,7 @@ def TESTING_annos(dataset):
 def submit_trainval(dataset):
     import pickle
     trainval = dataset.annot_path.split('.')[0].split('/')[-1]
-    pickle.dump(trainval, open(f'/home/volume/{trainval}_dataobject.pkl', 'wb'))
+    pickle.dump(trainval, open('/home/volume/{}_dataobject.pkl'.format(trainval), 'wb'))
     return None
 
 @task
@@ -80,7 +79,7 @@ def validate(testset):
 
     val_imgs_path = testset.annot_path.split('.')[0]
     
-    for val_img in tqdm(os.listdir(val_imgs_path)):
+    for val_img in os.listdir(val_imgs_path):
         print(os.path.join(val_imgs_path,val_img))
         prediction_array = detect_image(model_candidate, image_path=os.path.join(val_imgs_path,val_img), 
                          output_path='local_feature_store/validation/predictions/{}'.format(val_img), 
@@ -95,12 +94,12 @@ def validate(testset):
 
 @task
 def submit_data_to_volume():
-    response = os.system('cp -avr /home/local_feature_store/. /home/volume/.')
+    response = os.system("cp -avr /home/local_feature_store/. /home/volume/.")
 
     try:
         assert response == 0
     except AssertionError as e: 
-        e.args += f'error code: {response} failed to copy /home/local_feature_store/. to /home/volume/.'
+        e.args += "error code: {} failed to copy /home/local_feature_store/. to /home/volume/.".format(response)
         raise
     return None
 
