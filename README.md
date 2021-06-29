@@ -39,8 +39,8 @@ pip install prefect
 
 boot up the prefect server
 ```dif
-$prefect backend server
-$prefect server start
+prefect backend server
+prefect server start
 ```
 
 This is going to build a docker image for the prefect server and start running the prefect server conatiner.   
