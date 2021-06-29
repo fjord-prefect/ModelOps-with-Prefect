@@ -12,7 +12,7 @@ Assuming you have docker and conda already installed here are the step by step i
 
 Clone the directory.
 ```dif
-**$!git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git**
+**$ ! git clone https://github.com/fjord-prefect/ModelOps-with-Prefect.git**
 ```
 
 **$cd ModelOps-with-Prefect**
