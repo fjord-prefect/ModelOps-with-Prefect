@@ -1,2 +1,0 @@
-This directory is a bind mount from the prefect flow run which allows the output of the container to persist.  Output created during the flow run / container is put here and will exist after the flow terminates on your local machine.
-

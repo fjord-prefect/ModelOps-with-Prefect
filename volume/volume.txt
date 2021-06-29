@@ -1,1 +1,0 @@
-This directory contains files that will be copied to a named docker volume that will allow the data to persist.  Volumes can be added and shared with other docker containers as well as submitted to a registry that others can access.
