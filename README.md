@@ -34,7 +34,8 @@ Woohoo we have our prefect server running but it doesn't know about any of our c
 Okay now before we can run our code in prefect we need to set up an agent to communicate our code to the prefect server.  Open a new terminal window.  You will need admin rights on this one so sudo -i if you're on linux.
 
 **$prefect agent docker start**
-
+**$prefect agent docker start --volume \<insert path on your computer to dir\>/ModelOps-with-Prefect/local_feature_store:/home/local_feature_store --label feature_store**
+  
 Now we need a docker container to run our actual python code so open another terminal.  cd to the ModelOps-with-Prefect directory.  Make sure you're in the right conda environment.
 
 **$conda activate threesix**
