@@ -8,7 +8,7 @@ First create an environment called threesix which has python 3.6 installed.
 #conda create -n threesix python=3.6
 
 Activate the environment threesix.  
-#conda activate threesix
+# conda activate threesix
 You should now see the text "(threesix)" in your command prompt.  
 Test it out by running 
 python -V
@@ -18,11 +18,11 @@ Open a separate terminal window.
 You may need root access for docker commands.  If you are on linux you can use sudo -i to log into root terminal.  Windows takes care of this during the install so it shouldn't be an issue.
 
 Now install prefect
-#pip install prefect
+# pip install prefect
 
 boot up the prefect server
-#prefect backend server
-#prefect server start
+# prefect backend server
+# prefect server start
 
 This is going to build a docker image for the prefect server and start running the prefect server conatiner.   
 
@@ -33,7 +33,7 @@ Okay now before we can run our code in prefect we need to set up an agent to com
 prefect agent docker start
 
 Now we need a docker container to run our actual python code so open another terminal.  cd to the ModelOps-with-Prefect directory.  Make sure you're in the right conda environment.
-#conda activate threesix
+# conda activate threesix
 
 And build the container.  Exclude the sudo if you are on windows.
 sudo docker build . -t fjord_prefect:1
@@ -72,7 +72,7 @@ Here you can see all of our prefect server containers running and the images the
 Now lets actually train this model and run a prefect flow.  
 
 Open a new terminal window:
-#$conda activate threesix
-#$cd <some_path_to_ModelOps-with-Prefect>/ModelOps-with-Prefect
-#$python fjord_flow.py
+# conda activate threesix
+# cd <some_path_to_ModelOps-with-Prefect>/ModelOps-with-Prefect
+# python fjord_flow.py
 
