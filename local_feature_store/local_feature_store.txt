@@ -1,0 +1,1 @@
+This directory will be mounting to the docker container in the when starting up the prefect agent. This will allow output generated during the flow run inside the container to persist to your local machine via this directory.
